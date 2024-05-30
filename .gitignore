@@ -1,0 +1,9 @@
+data/csv
+data/ear
+data/pickled
+data/*.csv
+figs/*
+temp/
+__pycache__
+.pytest_cache
+*.png
