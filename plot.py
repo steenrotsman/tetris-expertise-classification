@@ -3,8 +3,8 @@ from os.path import join
 import matplotlib
 import matplotlib.pyplot as plt
 from cycler import cycler
-from train import COLS, get_multivariate_data
 
+LABELS = ['gaze_angle_x', 'gaze_angle_y', 'eye_aspect_ratio']
 WIDTH = 0.0138 * 372
 HEIGHT = WIDTH / 3 * 2
 LETTERING_SIZE = 8
@@ -34,15 +34,18 @@ def remove_spines(ax, remove_y=False):
     ax.spines['top'].set_visible(False)
 
 
-X_train, y_train, X_test, y_test = get_multivariate_data(0)
+if __name__ == '__main__':
+    from train import COLS, get_multivariate_data
 
-fig, axs = plt.subplots(3, sharex='all')
-labels = ['gaze_angle_x', 'gaze_angle_y', 'eye_aspect_ratio']
-for i, ax, label in zip(range(3), axs, labels):
-    row = X_train[10, i, 1000:1300]
-    ax.plot(row)
-    ax.set(ylabel=label, yticks=[round(min(row), 2), round(max(row), 2)])
-    remove_spines(ax)
-ax.set_xlabel('Seconds')
-fig.align_labels()
-plt.savefig('figs/signal.png')
+    X_train, y_train, X_test, y_test = get_multivariate_data(0)
+
+    fig, axs = plt.subplots(3, sharex='all')
+
+    for i, ax, label in zip(range(3), axs, LABELS):
+        row = X_train[10, i, 1000:1300]
+        ax.plot(row)
+        ax.set(ylabel=label, yticks=[round(min(row), 2), round(max(row), 2)])
+        remove_spines(ax)
+    ax.set_xlabel('Frames')
+    fig.align_labels()
+    plt.savefig('figs/signal.png')
