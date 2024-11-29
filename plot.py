@@ -1,5 +1,3 @@
-from os.path import join
-
 import matplotlib
 import matplotlib.pyplot as plt
 from cycler import cycler
@@ -35,7 +33,7 @@ def remove_spines(ax, remove_y=False):
 
 
 if __name__ == '__main__':
-    from train import COLS, get_multivariate_data
+    from train import get_multivariate_data
 
     X_train, y_train, X_test, y_test = get_multivariate_data(0)
 
